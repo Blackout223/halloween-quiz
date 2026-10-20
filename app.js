@@ -546,6 +546,9 @@
       </section>`;
     }
 
+    const emojiClue = (q, small) => (q.emoji
+      ? `<p class="q-emoji ${small ? 'is-small' : ''}" role="img" aria-label="Emoji puzzle: ${esc(q.emoji)}">${esc(q.emoji)}</p>` : '');
+
     function progressDots(current, total, label) {
       let dots = '';
       for (let i = 0; i < total; i++) dots += `<span class="q-dot ${i < current ? 'is-done' : ''} ${i === current ? 'is-current' : ''}"></span>`;
@@ -579,6 +582,7 @@
           ${multi() ? `<span class="answered-pill" id="answered" aria-live="off">${answeredCount()}/${Object.keys(state.players).length} answered</span>` : ''}
         </div>
         <h2 class="q-number" id="q-heading" tabindex="-1">Question ${state.qIdx + 1}</h2>
+        ${emojiClue(q)}
         <p class="q-text ${q.question.length > 150 ? 'is-long' : ''}">${esc(q.question)}</p>
         ${clueList}
         <div class="nav-row">
@@ -629,6 +633,7 @@
           ${progressDots(state.revealIdx, qs.length, 'Answer')}
         </div>
         <h2 class="q-number" id="a-heading" tabindex="-1">Question ${state.revealIdx + 1}</h2>
+        ${emojiClue(q, true)}
         <p class="reveal-q">${esc(q.question)}</p>
         ${clues}
         <p class="answer-label">Answer</p>
@@ -877,7 +882,7 @@
             <ol class="key-list">
               ${questionsFor(id).map((q) => `
                 <li>
-                  <p class="key-q">${esc(q.question)}<span class="key-diff">${esc(q.difficulty)}</span></p>
+                  <p class="key-q">${q.emoji ? `<span class="key-emoji">${esc(q.emoji)}</span> ` : ''}${esc(q.question)}<span class="key-diff">${esc(q.difficulty)}</span></p>
                   ${Array.isArray(q.clues) && q.clues.length ? `<ol class="key-clues">${q.clues.map((c) => `<li>${esc(c)}</li>`).join('')}</ol>` : ''}
                   <p class="key-a">Answer: ${esc(q.answer)}</p>
                   ${(q.acceptAlso || []).length ? `<p class="key-also"><em>Also accept:</em> ${q.acceptAlso.map(esc).join('; ')}</p>` : ''}

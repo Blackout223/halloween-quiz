@@ -301,6 +301,13 @@ legend { padding: 0 0.4rem; font-weight: 700; font-size: 1.1rem; color: var(--or
 }
 .q-text.is-long { font-size: clamp(1.5rem, 3.4vw, 3.1rem); max-width: 34ch; }
 
+.q-emoji {
+  font-size: clamp(4rem, 13vw, 10rem); line-height: 1.1; margin: 0.1em 0 0.15em; letter-spacing: 0.08em;
+  filter: drop-shadow(0 0 24px rgba(255, 140, 26, 0.35));
+  animation: emoji-pop 0.5s ease-out;
+}
+.q-emoji.is-small { font-size: clamp(2.6rem, 7vw, 5rem); animation: none; }
+@keyframes emoji-pop { from { transform: scale(0.6); opacity: 0; } to { transform: none; opacity: 1; } }
 .clues { list-style: none; padding: 0; margin: 0.4rem auto 0; display: grid; gap: 0.6rem; width: 100%; max-width: 1100px; text-align: left; }
 .clue {
   display: flex; gap: 0.8rem; align-items: baseline; padding: 0.7rem 1rem; border-radius: 14px;
@@ -548,6 +555,7 @@ body[data-phase="player"] .fx .bat-path { opacity: 0.5; }
   .key-list { margin: 0; padding-left: 8mm; }
   .key-list li { break-inside: avoid; page-break-inside: avoid; margin-bottom: 3mm; }
   .key-q { margin: 0 0 0.5mm; }
+  .key-emoji { font-size: 16pt; }
   .key-a { margin: 0; font-weight: 700; }
   .key-also, .key-expl { margin: 0; font-size: 9.5pt; }
   .key-expl { color: #333; }

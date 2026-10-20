@@ -15,6 +15,7 @@
  *     answer:      the accepted answer
  *     acceptAlso:  [] other answers the host may accept (surname only, spellings…)
  *     explanation: 1–2 sentences shown on the answer reveal
+ *     emoji:       OPTIONAL emoji puzzle shown extra large above the question (Emoji Puzzles round).
  *     clues:       OPTIONAL array, hardest clue first. If present, clues are revealed
  *                  one at a time (used by the "Who Am I?" round).
  *   }
@@ -42,6 +43,7 @@ window.QUIZ_ROUNDS = [
   { id: "science", title: "Science and Nature", emoji: "🦇", description: "Bats, spiders, pumpkins, the Moon and the science of fear." },
   { id: "literature", title: "Literature", emoji: "📖", description: "Gothic novels, ghost stories and masters of horror." },
   { id: "food", title: "Food and Traditions", emoji: "🍎", description: "Halloween around the world, the Day of the Dead and Bonfire Night." },
+  { id: "emoji", title: "Emoji Puzzles", emoji: "🧩", description: "Each set of emoji stands for a spooky film or story. Name it!" },
   { id: "anime", title: "Anime Spirits", emoji: "⚔️", description: "Ghost-type Pokémon, demons and curses: Pokémon, Demon Slayer and Jujutsu Kaisen." },
   { id: "whoami", title: "Who Am I?", emoji: "❓", description: "Clues are revealed one at a time and get easier as they go. Write your answer down whenever you think you know it." }
 ];
@@ -549,6 +551,88 @@ window.QUIZ_QUESTIONS = [
     answer: "Pan de muerto",
     acceptAlso: ["Pan de muertos", "Pan de los muertos"],
     explanation: "The name means ‘bread of the dead’. It is often flavoured with orange blossom or anise."
+  },
+
+  /* ---------------- EMOJI PUZZLES (the `emoji` field is shown extra large) ---------------- */
+  {
+    id: "em-01", round: "emoji", difficulty: "easy",
+    emoji: "🤡🎈",
+    question: "Name the Stephen King novel.",
+    answer: "It",
+    acceptAlso: [],
+    explanation: "Published in 1986, It features Pennywise, a shape-shifting clown who lures children with balloons."
+  },
+  {
+    id: "em-02", round: "emoji", difficulty: "easy",
+    emoji: "🏨🧛",
+    question: "Name the 2012 animated film.",
+    answer: "Hotel Transylvania",
+    acceptAlso: [],
+    explanation: "Adam Sandler voices Dracula, who runs a hotel where monsters can hide away from humans."
+  },
+  {
+    id: "em-03", round: "emoji", difficulty: "easy",
+    emoji: "💀🎸🇲🇽",
+    question: "Name the 2017 Pixar film.",
+    answer: "Coco",
+    acceptAlso: [],
+    explanation: "Coco follows a young musician, Miguel, who ends up in the Land of the Dead during Mexico's Day of the Dead."
+  },
+  {
+    id: "em-04", round: "emoji", difficulty: "medium",
+    emoji: "🧙‍♀️🧙‍♀️🧙‍♀️🕯️",
+    question: "Name the 1993 Disney film.",
+    answer: "Hocus Pocus",
+    acceptAlso: [],
+    explanation: "Lighting the Black Flame Candle brings the three Sanderson sisters back to Salem on Halloween night."
+  },
+  {
+    id: "em-05", round: "emoji", difficulty: "medium",
+    emoji: "🐦🐦🐦",
+    question: "Name the 1963 Alfred Hitchcock film.",
+    answer: "The Birds",
+    acceptAlso: ["Birds"],
+    explanation: "It was based on a short story by Daphne du Maurier, who also wrote Rebecca."
+  },
+  {
+    id: "em-06", round: "emoji", difficulty: "medium",
+    emoji: "🌲🧙‍♀️📹",
+    question: "Name the 1999 horror film.",
+    answer: "The Blair Witch Project",
+    acceptAlso: ["Blair Witch Project", "Blair Witch"],
+    explanation: "It made ‘found footage’ horror famous: three student film-makers vanish in the woods and only their recordings are found."
+  },
+  {
+    id: "em-07", round: "emoji", difficulty: "medium",
+    emoji: "🤫🐑",
+    question: "Name the 1991 film.",
+    answer: "The Silence of the Lambs",
+    acceptAlso: ["Silence of the Lambs"],
+    explanation: "Starring Jodie Foster and Anthony Hopkins as Hannibal Lecter, it won the Academy Award for Best Picture."
+  },
+  {
+    id: "em-08", round: "emoji", difficulty: "medium",
+    emoji: "💧🚫🍗🕛",
+    question: "Name the 1984 film.",
+    answer: "Gremlins",
+    acceptAlso: [],
+    explanation: "The rules for keeping a mogwai: no bright light, never get it wet, and never feed it after midnight."
+  },
+  {
+    id: "em-09", round: "emoji", difficulty: "hard",
+    emoji: "🗣️🐕❤️",
+    question: "Name the Edgar Allan Poe short story. (Think sounds, not meanings.)",
+    answer: "The Tell-Tale Heart",
+    acceptAlso: ["Tell-Tale Heart", "The Telltale Heart", "Tell Tale Heart"],
+    explanation: "Tell + tail + heart. In the 1843 story, a murderer is driven to confess by what he believes is his victim's heart still beating under the floor."
+  },
+  {
+    id: "em-10", round: "emoji", difficulty: "hard",
+    emoji: "🍬👨🐝",
+    question: "Name the 1992 horror film.",
+    answer: "Candyman",
+    acceptAlso: ["Candy Man"],
+    explanation: "Based on a Clive Barker story, its hook-handed killer, surrounded by bees, appears when you say his name five times in a mirror."
   },
 
   /* ---------------- ANIME SPIRITS: POKÉMON, DEMON SLAYER, JUJUTSU KAISEN ---------------- */
