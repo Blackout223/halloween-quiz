@@ -301,6 +301,14 @@ legend { padding: 0 0.4rem; font-weight: 700; font-size: 1.1rem; color: var(--or
 }
 .q-text.is-long { font-size: clamp(1.5rem, 3.4vw, 3.1rem); max-width: 34ch; }
 
+.diff-badge {
+  display: inline-flex; align-items: center; gap: 0.4em; padding: 0.2em 0.9em; border-radius: 999px;
+  font-weight: 700; font-size: clamp(0.9rem, 1.6vw, 1.3rem); margin: 0 0 0.6rem; border: 2px solid;
+}
+.diff-badge.is-easy { color: var(--green); border-color: rgba(140, 255, 107, 0.6); background: rgba(140, 255, 107, 0.08); }
+.diff-badge.is-medium { color: var(--orange-soft); border-color: rgba(255, 140, 26, 0.6); background: rgba(255, 140, 26, 0.08); }
+.diff-badge.is-hard { color: #ff8a8a; border-color: rgba(255, 107, 107, 0.7); background: rgba(255, 107, 107, 0.1); animation: hard-glow 1.8s ease-in-out infinite; }
+@keyframes hard-glow { 0%, 100% { box-shadow: 0 0 0 rgba(255, 107, 107, 0); } 50% { box-shadow: 0 0 18px rgba(255, 107, 107, 0.45); } }
 .q-emoji {
   font-size: clamp(4rem, 13vw, 10rem); line-height: 1.1; margin: 0.1em 0 0.15em; letter-spacing: 0.08em;
   filter: drop-shadow(0 0 24px rgba(255, 140, 26, 0.35));

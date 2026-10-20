@@ -68,6 +68,19 @@
     } catch (e) { /* fullscreen not supported */ }
   }
 
+  /* ---------------- Difficulty ---------------- */
+  const DIFFICULTY = {
+    easy: { rank: 0, skulls: '💀', label: 'Easy' },
+    medium: { rank: 1, skulls: '💀💀', label: 'Medium' },
+    hard: { rank: 2, skulls: '💀💀💀', label: 'Hard' }
+  };
+  const difficultyRank = (d) => (DIFFICULTY[d] ? DIFFICULTY[d].rank : 1);
+  function difficultyBadge(d) {
+    const info = DIFFICULTY[d];
+    if (!info) return '';
+    return `<span class="diff-badge is-${d}"><span aria-hidden="true">${info.skulls}</span> ${info.label}</span>`;
+  }
+
   /* ---------------- Answer checking ---------------- */
   // Lower-case, strip accents, punctuation and a leading "the/a/an".
   function norm(s) {
@@ -166,7 +179,15 @@
     const net = { status: 'off', retry: null };
 
     const roundById = (id) => ROUNDS.find((r) => r.id === id) || { id, title: id, emoji: '❔', description: '' };
-    const questionsFor = (id) => QUESTIONS.filter((q) => q.round === id);
+    // Each round runs easy → medium → hard; within a difficulty, the file's order is kept.
+    const byRound = new Map();
+    function questionsFor(id) {
+      if (!byRound.has(id)) {
+        byRound.set(id, QUESTIONS.filter((q) => q.round === id)
+          .sort((a, b) => difficultyRank(a.difficulty) - difficultyRank(b.difficulty)));
+      }
+      return byRound.get(id);
+    }
     const enabledRounds = () => state.rounds.filter((r) => r.on && questionsFor(r.id).length).map((r) => r.id);
     const currentRoundId = () => state.playOrder[state.roundIdx];
     const currentQs = () => questionsFor(currentRoundId());
@@ -347,6 +368,8 @@
         name: (state.players[pid] || {}).name || '',
         round: meta ? { id: roundId, idx: state.roundIdx, count: state.playOrder.length, title: meta.title, emoji: meta.emoji, qCount: currentQs().length } : null,
         qIdx: state.qIdx,
+        // Only the difficulty travels to phones, never the question itself.
+        diff: phase === 'question' && currentQs()[state.qIdx] ? currentQs()[state.qIdx].difficulty : null,
         myAnswers: roundId ? ((state.players[pid] || {}).answers || {})[roundId] || [] : []
       };
       if (phase === 'final') {
@@ -582,6 +605,7 @@
           ${multi() ? `<span class="answered-pill" id="answered" aria-live="off">${answeredCount()}/${Object.keys(state.players).length} answered</span>` : ''}
         </div>
         <h2 class="q-number" id="q-heading" tabindex="-1">Question ${state.qIdx + 1}</h2>
+        ${difficultyBadge(q.difficulty)}
         ${emojiClue(q)}
         <p class="q-text ${q.question.length > 150 ? 'is-long' : ''}">${esc(q.question)}</p>
         ${clueList}
@@ -1171,6 +1195,7 @@
             ${statusLine()}
             <p class="eyebrow">${esc(r.emoji)} ${esc(r.title)} · Round ${r.idx + 1} of ${r.count}</p>
             <h2 class="q-number" id="p-title" tabindex="-1">Question ${qi + 1}</h2>
+            ${difficultyBadge(host.diff)}
             <form id="answer-form" class="panel answer-form" novalidate>
               <label for="ans-current" class="sr-only">Your answer to question ${qi + 1}</label>
               <input id="ans-current" class="input input-big" type="text" maxlength="${MAX_ANSWER}" autocomplete="off"
